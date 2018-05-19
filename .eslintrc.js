@@ -31,6 +31,7 @@ module.exports = {
       js: 'never',
       vue: 'never'
     }],
+    'max-len':['error', {'code': 80}],
     // disallow reassignment of function parameters
     // disallow parameter object manipulation except for specific exclusions
     'no-param-reassign': ['error', {
