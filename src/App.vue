@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <HelloWorld/>
+    <search-bar/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
+import SearchBar from './components/SearchBar';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    SearchBar,
   },
 };
 </script>
