@@ -1,18 +1,13 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <search-bar/>
+    <img src="../assets/logo.png">
+    <router-view/>
   </div>
 </template>
 
 <script>
-import SearchBar from './components/SearchBar';
-
 export default {
   name: 'App',
-  components: {
-    SearchBar,
-  },
 };
 </script>
 

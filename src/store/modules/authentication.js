@@ -21,7 +21,7 @@ const actions = {
           commit('authSuccess', resJson.access_token);
         });
       },
-      (error) => { console.log(error); commit('authError'); });
+      (error) => { commit('authError', error); });
   },
 };
 
