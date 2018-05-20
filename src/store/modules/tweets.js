@@ -9,7 +9,6 @@ const initialState = {
 
 const getters = {
   tweets: state => state.tweets,
-  error: state => state.error,
 };
 
 const actions = {
@@ -17,14 +16,13 @@ const actions = {
     commit('beginSearch');
     search(term).then(
       (response) => {
-        console.log(response);
-        if (response.ok) {
-          response.json().then((resJson) => {
-            commit('searchSuccess', resJson);
-          });
+        if (response.status === 200) {
+          commit('searchSuccess', response.body);
+        } else {
+          commit('searchError', 'expired token');
         }
       },
-      (error) => { commit('authError', error); });
+      () => { commit('searchError'); });
   },
 };
 
@@ -37,9 +35,8 @@ const mutations = {
     state.tweets = results;
     state.isPending = false;
   },
-  searchError(state, error) {
+  searchError(state) {
     state.tweets = [];
-    state.error = error;
     state.isPending = false;
   },
 };

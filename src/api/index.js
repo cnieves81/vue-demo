@@ -12,7 +12,7 @@ export const search = (term) => {
   return axios.get(
     `${baseUrl}/1.1/search/tweets.json?q=${encodedTerm}&result_type=popular`,
     { headers: {
-      Authorization: `Bearer ${btoa(token)}`,
+      Authorization: `Bearer ${token}`,
     } },
   );
 };
