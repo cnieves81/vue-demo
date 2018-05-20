@@ -22,6 +22,9 @@ export default {
       term: '',
     };
   },
+  computed: {
+    reversedTerm() { return this.term.split('').reverse().join(''); },
+  },
 
 };
 </script>

@@ -1,11 +1,11 @@
 
 <template>
-  <ul>
+  <ul >
     <transition-group name="slide-fade">
       <li
         :key="tweet.id"
         v-for="tweet in shownTweets"
-        class="justify-content-md-center list-group-item item"
+        class="justify-content-md-center list-group-item mb-2"
       >
         <tweet :tweet="tweet"/>
       </li>
@@ -32,10 +32,10 @@ export default {
   methods: {
     popTweet() {
       if (this.allTweets.length > 0) {
-        this.shownTweets.push(this.allTweets.pop());
+        this.shownTweets.unshift(this.allTweets.pop());
       }
-      if (this.shownTweets.length > 3 || this.allTweets.length === 0) {
-        this.shownTweets.shift();
+      if (this.shownTweets.length > 5 || this.allTweets.length === 0) {
+        this.shownTweets.pop();
       }
     },
   },
@@ -48,6 +48,9 @@ export default {
       this.allTweets = [...newTweets];
     },
   },
+  destroyed() {
+    clearInterval(this.timer);
+  },
 };
 </script>
 
@@ -55,26 +58,21 @@ export default {
 /* Enter and leave animations can use different */
 /* durations and timing functions.              */
 .slide-fade-enter-active {
-  transition: all .3s linear;
+  transition: all .5s;
 }
 .slide-fade-leave-active {
-  transition: all .3s;
-}
-.item{
-  max-height: 50px;
+  transition: all .5s;
 }
 .slide-fade-leave-to{
-  /* transform: scaleY(0); */
-  /* transform-origin: top; */
-  max-height: 0px;
+  transform: translateY(10px);
   opacity: 0;
 }
 .slide-fade-leave {
-  max-height: 0px;
   opacity: 0;
 }
 .slide-fade-enter {
-  transform: translateY(10px);
+  transform: translateY(-10px);
+  max-height:0;
   opacity: 0;
 }
 </style>

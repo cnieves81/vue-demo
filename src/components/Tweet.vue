@@ -1,8 +1,8 @@
 
 <template>
-  <div>
-    {{ tweet.retweeted_status ? tweet.retweeted_status.text : tweet.text }}
-  </div>
+  <div
+    v-html="tweet.retweeted_status ? tweet.retweeted_status.text : tweet.text"
+  />
 </template>
 
 <script>
