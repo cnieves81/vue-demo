@@ -3,7 +3,7 @@ import router from '../../router';
 
 const initialState = {
   isPending: false,
-  token: null,
+  token: localStorage.getItem('token') || '',
   error: null,
 };
 
@@ -18,7 +18,6 @@ const actions = {
     commit('beginAuth');
     auth().then(
       (response) => {
-        console.log(response);
         if (response.status === 200) {
           localStorage.setItem('token', response.data.access_token);
           commit('authSuccess', response.data.access_token);
