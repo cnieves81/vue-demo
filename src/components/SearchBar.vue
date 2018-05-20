@@ -2,7 +2,7 @@
   <b-row class="justify-content-md-center">
     <b-col cols="6">
       <b-form-input
-        @change="search(term)"
+        @change="search({term })"
         v-model="term"
         type="text"
         placeholder="Search for a #"
@@ -14,7 +14,9 @@
 <script>
 export default {
   name: 'SearchBar',
-  props: { search: { type: Function, default: () => {} } },
+  props: {
+    search: { type: Function, default: () => {} },
+  },
   data() {
     return {
       term: '',

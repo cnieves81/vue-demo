@@ -10,7 +10,7 @@ export const search = (term) => {
   const token = localStorage.getItem('token');
   const encodedTerm = encodeURI(term);
   return axios.get(
-    `${baseUrl}/1.1/search/tweets.json?q=${encodedTerm}&result_type=popular`,
+    `${baseUrl}/1.1/search/tweets.json?q=${encodedTerm}&count=100`,
     { headers: {
       Authorization: `Bearer ${token}`,
     } },

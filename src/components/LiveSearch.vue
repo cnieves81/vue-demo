@@ -1,24 +1,32 @@
 
 <template>
   <div>
-    <search-bar :search="search"/>
+    <search-bar
+      :search="search"
+    />
+    <tweet-feed
+      v-if="showFeed"
+      :tweets="tweets"
+    />
+
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 import SearchBar from './SearchBar';
+import TweetFeed from './TweetFeed';
 
 export default {
   name: 'LiveSearch',
-  components: { SearchBar },
+  components: { SearchBar, TweetFeed },
   methods: {
     ...mapActions(['search']),
   },
   computed: {
-    isAuthenticated() {
-      return this.$store.isAuthenticated;
-    },
+    showFeed() { return this.$store.state.tweets.statuses.length > 0; },
+    tweets() { return this.$store.state.tweets.statuses; },
+    sinceId() { return this.$store.getters.latestTweetId; },
   },
 
 };

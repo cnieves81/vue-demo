@@ -3,21 +3,23 @@ import { search } from '../../api';
 
 const initialState = {
   isPending: false,
-  token: null,
   error: null,
+  statuses: [],
 };
 
 const getters = {
   tweets: state => state.tweets,
+  latestTweetId: state =>
+    (state.tweets.length > 0 ? state.tweets[state.tweets.length - 1] : ''),
 };
 
 const actions = {
-  search({ commit }, term) {
+  search({ commit }, { term, sinceId }) {
     commit('beginSearch');
-    search(term).then(
+    search(term, sinceId).then(
       (response) => {
         if (response.status === 200) {
-          commit('searchSuccess', response.body);
+          commit('searchSuccess', response.data.statuses);
         } else {
           commit('searchError', 'expired token');
         }
@@ -28,15 +30,15 @@ const actions = {
 
 const mutations = {
   beginSearch(state) {
-    state.tweets = [];
+    state.statuses = [];
     state.isPending = true;
   },
   searchSuccess(state, results) {
-    state.tweets = results;
+    state.statuses = results;
     state.isPending = false;
   },
   searchError(state) {
-    state.tweets = [];
+    state.statuses = [];
     state.isPending = false;
   },
 };
