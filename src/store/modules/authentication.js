@@ -1,4 +1,5 @@
 import { auth } from '../../api';
+import router from '../../router';
 
 const initialState = {
   isPending: false,
@@ -13,13 +14,16 @@ const getters = {
 };
 
 const actions = {
-  authenticate({ commit }, { key, secret }) {
+  authenticate({ commit }) {
     commit('beginAuth');
-    auth(key, secret).then(
+    auth().then(
       (response) => {
-        response.json().then((resJson) => {
-          commit('authSuccess', resJson.access_token);
-        });
+        console.log(response);
+        if (response.status === 200) {
+          localStorage.setItem('token', response.data.access_token);
+          commit('authSuccess', response.data.access_token);
+          router.push('/livesearch');
+        }
       },
       (error) => { commit('authError', error); });
   },
