@@ -34,7 +34,7 @@ export default {
       if (this.allTweets.length > 0) {
         this.shownTweets.unshift(this.allTweets.pop());
       }
-      if (this.shownTweets.length > 5 || this.allTweets.length === 0) {
+      if (this.shownTweets.length > 4 || this.allTweets.length === 0) {
         this.shownTweets.pop();
       }
     },

@@ -8,7 +8,8 @@ export const auth = () => axios.get(
 
 export const search = (term) => {
   const token = localStorage.getItem('token');
-  const encodedTerm = encodeURI(term);
+  const encodedTerm = encodeURIComponent(`${term}`);
+  console.log(encodedTerm);
   return axios.get(
     `${baseUrl}/1.1/search/tweets.json?q=${encodedTerm}&count=100`,
     { headers: {
